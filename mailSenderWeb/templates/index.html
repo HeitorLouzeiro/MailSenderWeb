@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail Sender Web</title>
+    <link rel="stylesheet" href="{% static 'assets\custom\css\custom.css' %}">
+</head>
+<body>
+    <h1>Home</h1>
+    {% include "pages/partials/_messages.html" %}
+
+    <form action="{% url "home" %}" method="post" autocompplete="off">
+        {% csrf_token %}
+        <input type="text" name="email" id="email" placeholder="Email" value="{{request.POST.email}}" required>
+        <input type="text" name="subject" id="subject" placeholder="Subject"  value="{{request.POST.subject}}"required>
+        <input type="file" name="file" id="file" placeholder="File" value="{{request.POST.file}}">
+        <textarea name="message" id="message" cols="30" rows="10" placeholder="Message" required>{{request.POST.message}}</textarea>
+        <input type="submit" value="Send">
+    </form>
+</body>
+<footer>
+    <script src="{% static 'assets\custom\js\custom.js' %}"></script>
+</footer>
+</html>
